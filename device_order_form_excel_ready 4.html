@@ -1,154 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Device Order Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin:0; padding:0; background:#f4f4f5; }
-    .container { max-width:800px; margin:2rem auto; background:#fff; padding:2rem; border-radius:12px; box-shadow:0 10px 30px rgba(15,23,42,0.1); }
-    h1,h2,h3 { margin-top:0; font-weight:600; color:#111827; }
-    h1 { font-size:1.75rem; margin-bottom:0.5rem; }
-    p { color:#4b5563; margin-top:0; }
-    label { display:block; margin-bottom:0.35rem; font-size:0.95rem; font-weight:500; color:#111827; }
-    .field { margin-bottom:1rem; }
-    input[type="text"], select { width:100%; padding:0.5rem 0.75rem; border-radius:8px; border:1px solid #d1d5db; font-size:0.95rem; box-sizing:border-box; }
-    input[type="text"]:focus, select:focus { outline:none; border-color:#2563eb; box-shadow:0 0 0 1px #2563eb33; }
-    .device-card { border:1px solid #e5e7eb; border-radius:10px; padding:1rem; margin-bottom:1rem; background:#f9fafb; }
-    .device-card h3 { margin-top:0; font-size:1rem; margin-bottom:0.5rem; color:#111827; }
-    .hidden { display:none; }
-    button { border:none; border-radius:999px; padding:0.75rem 1.5rem; font-size:0.95rem; font-weight:600; cursor:pointer; }
-    .submit-btn { background:#2563eb; color:white; }
-    .submit-btn:hover { background:#1d4ed8; }
-    .required { color:#dc2626; }
-    .note { font-size:0.85rem; color:#6b7280; margin-top:0.25rem; }
-    .message { margin-top:1rem; font-size:0.9rem; }
-    .message.success { color:#15803d; }
-    .message.error { color:#b91c1c; }
-    @media (max-width:600px){ .container{ margin:1rem; padding:1.25rem; } }
-  </style>
+<meta charset="UTF-8">
+<title>Device Order Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f5;
+}
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+}
+label {
+  font-weight: 600;
+  display: block;
+  margin-top: 12px;
+}
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.message {
+  margin-top: 15px;
+  font-weight: 600;
+}
+.success { color: green; }
+.error { color: red; }
+.hidden { display: none; }
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Device Order Form</h1>
-    <p>Fill out this form to place your device order.</p>
 
-    <form id="order-form">
-      <h2>Customer Information</h2>
-      <div class="field">
-        <label for="name">Name <span class="required">*</span></label>
-        <input type="text" id="name" name="name" placeholder="Enter name" required>
-      </div>
+<div class="container">
+<h2>Device Order Form</h2>
 
-      <div class="field">
-        <label for="vendor">Vendor Address <span class="required">*</span></label>
-        <select id="vendor" name="vendor" required>
-          <option value="">Select vendor address</option>
-          <option>350A Beverly Blvd, Upper Darby, PA 19082</option>
-          <option>34 Diamond St Elmont, NY 11003</option>
-          <option>309 Richfield Rd, Upper Darby, PA 19082</option>
-          <option>8006 Ramsburg Dr Charlotte, NC 28269</option>
-        </select>
-      </div>
+<form id="orderForm">
+<label>Name</label>
+<input type="text" name="name" required>
 
-      <div class="field">
-        <label for="quantity">Quantity <span class="required">*</span></label>
-        <select id="quantity" name="quantity" required>
-          <option value="">Select quantity</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <p class="note">Device sections will appear based on the quantity selected.</p>
-      </div>
+<label>Vendor Address</label>
+<select name="vendor" required>
+<option value="">Select</option>
+<option>350A Beverly Blvd, Upper Darby, PA 19082</option>
+<option>34 Diamond St Elmont, NY 11003</option>
+<option>309 Richfield Rd, Upper Darby, PA 19082</option>
+<option>8006 Ramsburg Dr Charlotte, NC 28269</option>
+</select>
 
-      <h2>Device Details</h2>
+<label>Quantity</label>
+<select name="quantity" id="quantity" required>
+<option value="">Select</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
 
-      <div id="device-1" class="device-card hidden">
-        <h3>Device 1</h3>
-        <div class="field">
-          <label for="device1">Device <span class="required">*</span></label>
-          <select id="device1" name="device1">
-            <option value="">Select device</option>
-            <option>iPhone 17 Pro Max</option>
-            <option>iPhone 17 Pro</option>
-            <option>iPhone 17 Air</option>
-            <option>iPhone 17</option>
-            <option>iPhone 16 Pro Max</option>
-            <option>iPhone 16 Pro</option>
-            <option>iPhone 16 Plus</option>
-            <option>iPhone 16</option>
-            <option>iPhone 16E</option>
-            <option>iPhone 15 Pro Max</option>
-            <option>iPhone 15 Pro</option>
-            <option>iPhone 15 Plus</option>
-            <option>iPhone 15</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="gb1">Storage Size (GB) <span class="required">*</span></label>
-          <select id="gb1" name="gb1">
-            <option value="">Select storage</option>
-            <option>256GB - All Colors</option>
-            <option>512GB - All Colors</option>
-            <option>1TB - All Colors</option>
-            <option>2TB - All Colors</option>
-          </select>
-        </div>
-      </div>
+<div id="devices"></div>
 
-      <!-- Add other device cards similarly if needed -->
+<button type="submit">Submit</button>
+<div class="message" id="msg"></div>
+</form>
+</div>
 
-      <button type="submit" class="submit-btn">Submit</button>
-    </form>
+<script>
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyibMpKc8lc1-yy3eRqq05jZw5bTJ-DstdpDdB9NH0IrAy5JFVbUM_K-USVd0z-m3Py/exec";
 
-    <div id="message" class="message"></div>
-  </div>
+const quantityEl = document.getElementById("quantity");
+const devicesDiv = document.getElementById("devices");
 
-  <script>
-    const form = document.getElementById('order-form');
-    const messageEl = document.getElementById('message');
+quantityEl.addEventListener("change", () => {
+  devicesDiv.innerHTML = "";
+  let q = parseInt(quantityEl.value);
+  for (let i = 1; i <= q; i++) {
+    devicesDiv.innerHTML += `
+      <label>Device ${i}</label>
+      <select name="device${i}" required>
+        <option value="">Select</option>
+        <option>iPhone 17 Pro Max</option>
+        <option>iPhone 16 Pro</option>
+        <option>iPhone 15</option>
+      </select>
 
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbyibMpKc8lc1-yy3eRqq05jZw5bTJ-DstdpDdB9NH0IrAy5JFVbUM_K-USVd0z-m3Py/exec";
+      <label>Storage ${i}</label>
+      <select name="gb${i}" required>
+        <option value="">Select</option>
+        <option>256GB</option>
+        <option>512GB</option>
+        <option>1TB</option>
+      </select>
+    `;
+  }
+});
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+document.getElementById("orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const msg = document.getElementById("msg");
+  msg.textContent = "Submitting...";
+  msg.className = "message";
 
-      const formData = new FormData(form);
-      const data = {};
-      formData.forEach((value, key) => data[key] = value);
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
 
-      fetch(webAppUrl, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(res => res.text())
-      .then(response => {
-        messageEl.textContent = "Order submitted successfully!";
-        messageEl.classList.remove('error');
-        messageEl.classList.add('success');
-        form.reset();
-        document.querySelectorAll('.device-card').forEach(dc => dc.classList.add('hidden'));
-      })
-      .catch(err => {
-        messageEl.textContent = "Submission failed, try again!";
-        messageEl.classList.remove('success');
-        messageEl.classList.add('error');
-      });
-    });
+  fetch(webAppUrl, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    msg.textContent = "Order submitted successfully!";
+    msg.classList.add("success");
+    e.target.reset();
+    devicesDiv.innerHTML = "";
+  })
+  .catch(() => {
+    msg.textContent = "Submission failed. Try again.";
+    msg.classList.add("error");
+  });
+});
+</script>
 
-    // Show device cards based on quantity
-    const quantitySelect = document.getElementById('quantity');
-    quantitySelect.addEventListener('change', () => {
-      const qty = parseInt(quantitySelect.value);
-      document.querySelectorAll('.device-card').forEach((dc, idx) => {
-        if(idx < qty) dc.classList.remove('hidden');
-        else dc.classList.add('hidden');
-      });
-    });
-  </script>
 </body>
 </html>
